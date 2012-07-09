@@ -1,8 +1,8 @@
-package com.gmail.entityreborn.pluginloader.api;
+package com.gmail.entityreborn.extensionloader.api;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Extension {
+public @interface ExtensionAnnotation {
 }

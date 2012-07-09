@@ -1,8 +1,8 @@
-package com.gmail.entityreborn.pluginloader;
+package com.gmail.entityreborn.extensionloader.example;
 
-import com.gmail.entityreborn.pluginloader.ExtensionLoader;
-import com.gmail.entityreborn.pluginloader.api.Extension;
-import com.gmail.entityreborn.pluginloader.api.IExtension;
+import com.gmail.entityreborn.extensionloader.SimpleExtensionManager;
+import com.gmail.entityreborn.extensionloader.api.BaseExtensionType;
+import com.gmail.entityreborn.extensionloader.api.ExtensionAnnotation;
 
 public class Main {
 	public static void main(String[] arguments) throws Throwable {
@@ -11,23 +11,25 @@ public class Main {
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public Main() throws Throwable {
-		ExtensionLoader loader = new ExtensionLoader();
+		SimpleExtensionManager loader = new SimpleExtensionManager();
 		loader.addDirectory("extensions");
 		
-		loader.loadFor(IExtension.class);
-		loader.loadFor(Extension.class);
+		loader.loadFor(ExampleExtensionType.class);
+		loader.loadFor(ExtensionAnnotation.class);
 
-	    for (IExtension ext : loader.getInterfaced(IExtension.class)) {
-            System.out.println("Running " + ext.getName());
+	    for (BaseExtensionType ext : loader.getInterfaced(ExampleExtensionType.class)) {
+	        ExampleExtensionType extension = (ExampleExtensionType)ext;
+	        
+            System.out.println("Running " + extension.getName());
             
             try {
-                ext.init();
+                extension.init();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 	    
-	    for (Class ext : loader.getAnnotated(Extension.class)) {
+	    for (Class ext : loader.getAnnotated(ExtensionAnnotation.class)) {
 	        try {
     	        System.out.println("Running " + ext.getMethod("getName").invoke(null));
                 

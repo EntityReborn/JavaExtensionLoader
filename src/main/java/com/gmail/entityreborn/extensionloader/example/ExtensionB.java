@@ -1,8 +1,8 @@
-package com.gmail.entityreborn.pluginloader;
+package com.gmail.entityreborn.extensionloader.example;
 
-import com.gmail.entityreborn.pluginloader.api.Extension;
+import com.gmail.entityreborn.extensionloader.api.ExtensionAnnotation;
 
-@Extension
+@ExtensionAnnotation
 public class ExtensionB {
     public static String getName() {
         return "Test2";
